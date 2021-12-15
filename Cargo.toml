@@ -1,0 +1,16 @@
+[package]
+name = "varball"
+version = "0.1.0"
+edition = "2021"
+authors = ["Saghm Rossi <saghmrossi@gmail.com>"]
+license = "Apache-2.0"
+keywords = ["baseball", "simulate", "simulation"]
+repository = "https://github.com/saghm/varball"
+categories = ["command-line-utilities", "simulation"]
+description = "Simulates the length of baseball games using naive formalae for the runs scored each inning"
+
+[dependencies]
+array-macro = "2.1.0"
+rand = "0.8.4"
+rayon = "1.5.1"
+structopt = "0.3.25"
