@@ -11,6 +11,7 @@ description = "Simulates the length of baseball games using naive formalae for t
 
 [dependencies]
 array-macro = "2.1.0"
+num-format = "0.4.0"
 rand = "0.8.4"
 rayon = "1.5.1"
 structopt = "0.3.25"

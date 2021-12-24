@@ -2,6 +2,7 @@
 mod test;
 
 use array_macro::array;
+use num_format::{Buffer, Locale};
 use rand::{thread_rng, Rng};
 use rayon::prelude::*;
 use std::{
@@ -217,9 +218,20 @@ fn simulate_inning_counts(opts: &Options) -> usize {
     }
 }
 
+fn formatted_usize(number: usize) -> Buffer {
+    let mut buffer = Buffer::new();
+    buffer.write_formatted(&number, &Locale::en);
+    buffer
+}
+
 fn print_inning_counts(total_games: usize, num_extra_innings_games: usize) {
-    println!("Total games played: {}", total_games);
-    println!("Number of extra inning games: {}", num_extra_innings_games);
+    let total_games_display = format!("{}", formatted_usize(total_games));
+
+    println!("Total games played: {}", total_games_display);
+    println!(
+        "Number of extra inning games: {}",
+        formatted_usize(num_extra_innings_games)
+    );
     println!("\nNumber of games with <n> innings:");
 
     for (inning, count) in INNING_COUNTS
@@ -228,7 +240,12 @@ fn print_inning_counts(total_games: usize, num_extra_innings_games: usize) {
         .enumerate()
         .filter(|(_, count)| *count > 0)
     {
-        println!("  {} innings: {}", inning + 10, count);
+        print!("  {} innings: ", inning + 10);
+        println!(
+            "{count:>width$}",
+            count = formatted_usize(count).as_str(),
+            width = total_games_display.chars().count(),
+        );
     }
 }
 
